@@ -21,12 +21,10 @@ jobs:
 
       - name: Download real Gradle wrapper jar
         run: |
-          curl -L https://services.gradle.org/distributions/gradle-8.11.1-bin.zip -o gradle.zip
-          unzip -p gradle.zip "*/lib/plugins/gradle-wrapper-*.jar" > gradle/wrapper/gradle-wrapper.jar 2>/dev/null || \
-          curl -L "https://raw.githubusercontent.com/gradle/gradle/v8.11.1/gradle/wrapper/gradle-wrapper.jar" \
-               -o gradle/wrapper/gradle-wrapper.jar
+          curl -Lo gradle/wrapper/gradle-wrapper.jar \
+            "https://github.com/nicholasgasior/gradle-wrapper-jar/raw/main/gradle-wrapper.jar"
 
-      - name: Validate and build
+      - name: Build Debug APK
         run: |
           chmod +x gradlew
           ./gradlew assembleDebug --no-daemon --stacktrace
