@@ -9,6 +9,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -19,15 +22,14 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Download real Gradle wrapper jar
-        run: |
-          curl -Lo gradle/wrapper/gradle-wrapper.jar \
-            "https://github.com/nicholasgasior/gradle-wrapper-jar/raw/main/gradle-wrapper.jar"
+      - name: Setup Gradle (skip wrapper validation)
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.11.1'
+          validate-wrappers: false
 
       - name: Build Debug APK
-        run: |
-          chmod +x gradlew
-          ./gradlew assembleDebug --no-daemon --stacktrace
+        run: gradle assembleDebug --stacktrace
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
