@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.VoiceReminder" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/accent</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="android:statusBarColor">@color/primary_dark</item>
+        <item name="android:navigationBarColor">@color/background</item>
+    </style>
+
+    <style name="Theme.VoiceReminder.Alarm" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:windowBackground">@color/alarm_bg</item>
+        <item name="android:statusBarColor">@color/alarm_bg</item>
+        <item name="android:navigationBarColor">@color/alarm_bg</item>
+        <item name="colorPrimary">@color/primary_light</item>
+        <item name="colorSecondary">@color/accent</item>
+    </style>
+
+</resources>

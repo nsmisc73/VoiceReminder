@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Voice Reminder</string>
+    <string name="widget_label">Reminders Widget</string>
+
+    <!-- Actions -->
+    <string name="confirm">Confirm</string>
+    <string name="edit">Edit</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="save">Save</string>
+    <string name="settings">Settings</string>
+    <string name="reminder">Reminder</string>
+    <string name="new_reminder">New Reminder</string>
+    <string name="edit_reminder">Edit Reminder</string>
+
+    <!-- Main screen -->
+    <string name="tab_pending">Pending</string>
+    <string name="tab_all">All</string>
+    <string name="empty_state">No reminders yet.\nTap 🎤 to create one by voice.</string>
+    <string name="voice_prompt">Say your reminder with date and time…</string>
+    <string name="mic_permission_denied">Microphone permission is required for voice input.</string>
+    <string name="speech_not_available">Speech recognition is not available on this device.</string>
+
+    <!-- Confirm dialog -->
+    <string name="confirm_reminder_title">Confirm Reminder</string>
+    <string name="confirm_reminder_msg">Heard: \"%1$s\"\n\n📝 Task: %2$s\n🕐 When: %3$s\n\nDoes this look right?</string>
+    <string name="reminder_saved">Reminder set: %1$s</string>
+    <string name="reminder_updated">Reminder updated!</string>
+
+    <!-- Delete -->
+    <string name="delete_title">Delete Reminder</string>
+    <string name="delete_msg">Delete \"%1$s\"?</string>
+
+    <!-- Status labels -->
+    <string name="status_pending">⏰ Pending</string>
+    <string name="status_snoozed">💤 Snoozed</string>
+    <string name="status_overdue">⚠ Overdue</string>
+    <string name="status_done">✔ Done</string>
+
+    <!-- Add/Edit screen -->
+    <string name="hint_title">Reminder title *</string>
+    <string name="hint_description">Notes (optional)</string>
+    <string name="title_required">Please enter a title</string>
+    <string name="time_in_past">Please set a future date and time</string>
+    <string name="btn_pick_date">📅 Pick Date</string>
+    <string name="btn_pick_time">🕐 Pick Time</string>
+    <string name="pick_ringtone">Select Alarm Tone</string>
+    <string name="ringtone_label">🎵 %1$s</string>
+    <string name="system_default">System Default</string>
+    <string name="custom">Custom</string>
+    <string name="vibration_label">📳 Vibration</string>
+    <string name="btn_save_reminder">💾  SAVE REMINDER</string>
+
+    <!-- Alarm screen -->
+    <string name="btn_dismiss">✓  DISMISS</string>
+    <string name="snooze_label">SNOOZE</string>
+    <string name="custom_snooze">Custom Snooze</string>
+    <string name="snooze_minutes_hint">Minutes</string>
+    <string name="snooze_btn">Snooze</string>
+    <string name="fmt_minutes">%1$dm</string>
+    <string name="fmt_one_hour">1h</string>
+    <string name="fmt_hours">%1$dh</string>
+    <string name="tap_to_view">Tap to view</string>
+
+    <!-- Settings screen -->
+    <string name="snooze_section_title">💤 Snooze Options (minutes)</string>
+    <string name="snooze_section_desc">Customize the 4 snooze buttons on the alarm screen</string>
+    <string name="snooze_btn_1_hint">Button 1</string>
+    <string name="snooze_btn_2_hint">Button 2</string>
+    <string name="snooze_btn_3_hint">Button 3</string>
+    <string name="snooze_btn_4_hint">Button 4</string>
+    <string name="btn_save_snooze">Save Snooze Settings</string>
+    <string name="snooze_saved">Snooze options saved!</string>
+    <string name="ringtone_section_title">🎵 Default Ringtone</string>
+    <string name="btn_change_ringtone">Change Ringtone</string>
+    <string name="vibrate_section_title">📳 Default Vibration</string>
+
+    <!-- Preference keys (used in code via R.string) -->
+    <string name="pref_snooze_1" translatable="false">pref_snooze_1</string>
+    <string name="pref_snooze_2" translatable="false">pref_snooze_2</string>
+    <string name="pref_snooze_3" translatable="false">pref_snooze_3</string>
+    <string name="pref_snooze_4" translatable="false">pref_snooze_4</string>
+    <string name="pref_default_ringtone" translatable="false">pref_default_ringtone</string>
+    <string name="pref_default_vibrate" translatable="false">pref_default_vibrate</string>
+
+    <!-- Notification channel -->
+    <string name="channel_alarm_name">Alarm Notifications</string>
+    <string name="channel_snooze_name">Snooze Notifications</string>
+
+    <!-- Menu -->
+    <string name="action_settings">Settings</string>
+
+    <!-- Widget -->
+    <string name="widget_title">⏰ Reminders</string>
+    <string name="no_reminders_widget">No upcoming reminders 🎉</string>
+
+    <!-- Plurals placeholder (needed for plurals resource) -->
+</resources>
