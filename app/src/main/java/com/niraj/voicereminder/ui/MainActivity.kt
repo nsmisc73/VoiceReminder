@@ -22,11 +22,16 @@ import com.niraj.voicereminder.R
 import com.niraj.voicereminder.data.Reminder
 import com.niraj.voicereminder.data.VoiceNLPParser
 import com.niraj.voicereminder.databinding.ActivityMainBinding
+import com.niraj.voicereminder.widget.ReminderWidgetProvider
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
+
+    companion object {
+        const val ACTION_LAUNCH_VOICE = "com.niraj.voicereminder.LAUNCH_VOICE"
+    }
 
     private lateinit var binding: ActivityMainBinding
     private val viewModel: ReminderViewModel by viewModels()
@@ -56,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 
     private val notifPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
-    ) { /* granted or not, continue */ }
+    ) { /* proceed regardless */ }
 
     // ── Lifecycle ─────────────────────────────────────────────────────────────
 
@@ -64,21 +69,32 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setSupportActionBar(binding.toolbar)
 
-        requestNotificationPermissionIfNeeded()
+        requestNotificationPermission()
         setupRecyclerView()
         setupTabs()
         setupFabs()
         observeReminders()
+
+        // If launched from widget mic button, open voice immediately
+        if (intent?.action == ACTION_LAUNCH_VOICE) {
+            binding.root.post { onVoiceFabClicked() }
+        }
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        if (intent.action == ACTION_LAUNCH_VOICE) {
+            binding.root.post { onVoiceFabClicked() }
+        }
     }
 
     // ── Setup ─────────────────────────────────────────────────────────────────
 
     private fun setupRecyclerView() {
         adapter = ReminderAdapter(
-            onItemClick = { reminder ->
+            onItemClick  = { reminder ->
                 startActivity(
                     Intent(this, AddEditReminderActivity::class.java)
                         .putExtra(AddEditReminderActivity.EXTRA_REMINDER_ID, reminder.id)
@@ -87,6 +103,7 @@ class MainActivity : AppCompatActivity() {
             onDeleteClick = { reminder -> confirmDelete(reminder) },
             onToggleActive = { reminder ->
                 viewModel.updateReminder(reminder.copy(isActive = !reminder.isActive))
+                ReminderWidgetProvider.requestUpdate(this)
             }
         )
         binding.recyclerReminders.layoutManager = LinearLayoutManager(this)
@@ -113,7 +130,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun observeReminders() {
         viewModel.activeReminders.observe(this) { if (!showAllReminders) updateList(it) }
-        viewModel.allReminders.observe(this)   { if (showAllReminders)  updateList(it) }
+        viewModel.allReminders.observe(this)    { if (showAllReminders)  updateList(it) }
     }
 
     private fun refreshList() {
@@ -126,8 +143,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateList(list: List<Reminder>) {
         adapter.submitList(list)
-        binding.tvEmpty.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
-        binding.recyclerReminders.visibility = if (list.isEmpty()) View.GONE else View.VISIBLE
+        binding.tvEmpty.visibility =
+            if (list.isEmpty()) View.VISIBLE else View.GONE
+        binding.recyclerReminders.visibility =
+            if (list.isEmpty()) View.GONE else View.VISIBLE
     }
 
     // ── Voice input ───────────────────────────────────────────────────────────
@@ -170,7 +189,12 @@ class MainActivity : AppCompatActivity() {
                     triggerAtMillis = result.triggerAtMillis
                 )
                 viewModel.addReminder(reminder)
-                Toast.makeText(this, getString(R.string.reminder_saved, result.title), Toast.LENGTH_SHORT).show()
+                ReminderWidgetProvider.requestUpdate(this)
+                Toast.makeText(
+                    this,
+                    getString(R.string.reminder_saved, result.title),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
             .setNeutralButton(getString(R.string.edit)) { _, _ ->
                 startActivity(
@@ -185,7 +209,7 @@ class MainActivity : AppCompatActivity() {
             .show()
     }
 
-    // ── Delete confirmation ───────────────────────────────────────────────────
+    // ── Delete ────────────────────────────────────────────────────────────────
 
     private fun confirmDelete(reminder: Reminder) {
         AlertDialog.Builder(this)
@@ -193,6 +217,7 @@ class MainActivity : AppCompatActivity() {
             .setMessage(getString(R.string.delete_msg, reminder.title))
             .setPositiveButton(getString(R.string.delete)) { _, _ ->
                 viewModel.deleteReminder(reminder)
+                ReminderWidgetProvider.requestUpdate(this)
             }
             .setNegativeButton(getString(R.string.cancel), null)
             .show()
@@ -200,7 +225,7 @@ class MainActivity : AppCompatActivity() {
 
     // ── Permissions ───────────────────────────────────────────────────────────
 
-    private fun requestNotificationPermissionIfNeeded() {
+    private fun requestNotificationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
                 != PackageManager.PERMISSION_GRANTED
@@ -210,7 +235,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // ── Options menu ──────────────────────────────────────────────────────────
+    // ── Menu ──────────────────────────────────────────────────────────────────
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
