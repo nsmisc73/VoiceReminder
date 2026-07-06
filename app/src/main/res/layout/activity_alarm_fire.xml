@@ -15,15 +15,13 @@
         android:padding="28dp"
         android:paddingTop="60dp">
 
-        <!-- Bell icon -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="⏰"
-            android:textSize="@dimen/alarm_icon_size"
+            android:textSize="64sp"
             android:layout_marginBottom="16dp" />
 
-        <!-- Current time -->
         <TextView
             android:id="@+id/tvAlarmTime"
             android:layout_width="wrap_content"
@@ -33,21 +31,19 @@
             android:layout_marginBottom="10dp"
             android:text="09:00 AM  •  Mon, 01 Jan" />
 
-        <!-- Reminder title -->
         <TextView
             android:id="@+id/tvAlarmTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/alarm_title_size"
+            android:textSize="30sp"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:textAlignment="center"
             android:layout_marginBottom="10dp"
             android:maxLines="3"
             android:ellipsize="end"
-            android:text="Call John" />
+            android:text="Reminder" />
 
-        <!-- Description (original voice text) -->
         <TextView
             android:id="@+id/tvAlarmDesc"
             android:layout_width="match_parent"
@@ -57,78 +53,114 @@
             android:textAlignment="center"
             android:maxLines="3"
             android:ellipsize="end"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="36dp"
             android:text="" />
 
-        <!-- Snooze label -->
+        <!-- SNOOZE label -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/snooze_label"
+            android:text="SNOOZE FOR"
             android:textSize="11sp"
             android:textColor="#88FFFFFF"
             android:letterSpacing="0.15"
-            android:layout_marginBottom="12dp" />
+            android:layout_marginBottom="10dp" />
 
-        <!-- 4 snooze buttons in a 2x2 grid -->
-        <GridLayout
+        <!-- Row 1: 15m and 30m -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:columnCount="4"
-            android:layout_marginBottom="36dp">
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSnooze1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_margin="4dp"
-                android:text="15m"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                android:text="15 min"
+                android:textSize="14sp"
                 android:textColor="@color/white"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                app:strokeColor="@color/white" />
+                app:strokeColor="@color/white"
+                app:strokeWidth="1dp"
+                app:cornerRadius="26dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSnooze2"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_margin="4dp"
-                android:text="30m"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                android:text="30 min"
+                android:textSize="14sp"
                 android:textColor="@color/white"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                app:strokeColor="@color/white" />
+                app:strokeColor="@color/white"
+                app:strokeWidth="1dp"
+                app:cornerRadius="26dp" />
+
+        </LinearLayout>
+
+        <!-- Row 2: 1 hour and 2 hours -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSnooze3"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_margin="4dp"
-                android:text="1h"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                android:text="1 hour"
+                android:textSize="14sp"
                 android:textColor="@color/white"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                app:strokeColor="@color/white" />
+                app:strokeColor="@color/white"
+                app:strokeWidth="1dp"
+                app:cornerRadius="26dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSnooze4"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_margin="4dp"
-                android:text="@string/custom"
-                android:textColor="@color/accent_light"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                android:text="2 hours"
+                android:textSize="14sp"
+                android:textColor="@color/white"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                app:strokeColor="@color/accent_light" />
+                app:strokeColor="@color/white"
+                app:strokeWidth="1dp"
+                app:cornerRadius="26dp" />
 
-        </GridLayout>
+        </LinearLayout>
 
-        <!-- Dismiss button -->
+        <!-- Custom date/time snooze -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSnoozeCustom"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginBottom="24dp"
+            android:text="📅  Custom Date &amp; Time"
+            android:textSize="14sp"
+            android:textColor="@color/accent_light"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:strokeColor="@color/accent_light"
+            app:strokeWidth="1dp"
+            app:cornerRadius="26dp" />
+
+        <!-- COMPLETE / DISMISS button -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnDismiss"
-            android:layout_width="220dp"
+            android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:text="@string/btn_dismiss"
+            android:layout_marginBottom="16dp"
+            android:text="✓  COMPLETE"
             android:textSize="16sp"
             android:textColor="@color/white"
             app:backgroundTint="@color/accent"
