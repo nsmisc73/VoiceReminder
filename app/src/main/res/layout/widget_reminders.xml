@@ -5,62 +5,75 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/bg_widget"
-    android:padding="14dp">
+    android:padding="12dp">
 
-    <!-- Header row -->
+    <!-- Header: title + mic button -->
     <LinearLayout
-        android:id="@+id/widget_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:layout_marginBottom="8dp">
+        android:layout_marginBottom="6dp">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/widget_title"
+            android:text="⏰ Reminders"
             android:textSize="13sp"
             android:textStyle="bold"
             android:textColor="#FFFFFF" />
 
+        <!-- 🎤 Mic button — tapping launches voice input -->
         <TextView
-            android:id="@+id/widget_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="11sp"
-            android:textColor="#AAFFFFFF"
-            android:text="0 pending reminders" />
+            android:id="@+id/widget_btn_mic"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:text="🎤"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:background="@drawable/bg_widget_mic_btn"
+            android:clickable="true"
+            android:focusable="true" />
 
     </LinearLayout>
+
+    <!-- Pending count -->
+    <TextView
+        android:id="@+id/widget_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:textColor="#AAFFFFFF"
+        android:layout_marginBottom="6dp"
+        android:text="0 pending reminders" />
 
     <!-- Divider -->
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#33FFFFFF"
-        android:layout_marginBottom="6dp" />
+        android:layout_height="0.5dp"
+        android:background="#44FFFFFF"
+        android:layout_marginBottom="4dp" />
 
     <!-- Empty state -->
     <TextView
         android:id="@+id/widget_empty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/no_reminders_widget"
-        android:textSize="12sp"
+        android:text="No upcoming reminders 🎉"
+        android:textSize="11sp"
         android:textColor="#AAFFFFFF"
         android:textAlignment="center"
         android:padding="8dp"
         android:visibility="gone" />
 
-    <!-- Row 1 -->
+    <!-- Reminder rows (5 static slots) -->
     <LinearLayout
         android:id="@+id/widget_row_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingVertical="5dp"
+        android:paddingVertical="4dp"
         android:visibility="gone">
         <TextView android:id="@+id/widget_title_1"
             android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -70,14 +83,16 @@
             android:layout_width="match_parent" android:layout_height="wrap_content"
             android:textSize="10sp" android:textColor="#AAFFFFFF" />
     </LinearLayout>
+    <View android:id="@+id/widget_div_1" android:layout_width="match_parent"
+        android:layout_height="0.5dp" android:background="#22FFFFFF"
+        android:layout_marginVertical="2dp" android:visibility="gone" />
 
-    <!-- Row 2 -->
     <LinearLayout
         android:id="@+id/widget_row_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingVertical="5dp"
+        android:paddingVertical="4dp"
         android:visibility="gone">
         <TextView android:id="@+id/widget_title_2"
             android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -87,14 +102,16 @@
             android:layout_width="match_parent" android:layout_height="wrap_content"
             android:textSize="10sp" android:textColor="#AAFFFFFF" />
     </LinearLayout>
+    <View android:id="@+id/widget_div_2" android:layout_width="match_parent"
+        android:layout_height="0.5dp" android:background="#22FFFFFF"
+        android:layout_marginVertical="2dp" android:visibility="gone" />
 
-    <!-- Row 3 -->
     <LinearLayout
         android:id="@+id/widget_row_3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingVertical="5dp"
+        android:paddingVertical="4dp"
         android:visibility="gone">
         <TextView android:id="@+id/widget_title_3"
             android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -104,14 +121,16 @@
             android:layout_width="match_parent" android:layout_height="wrap_content"
             android:textSize="10sp" android:textColor="#AAFFFFFF" />
     </LinearLayout>
+    <View android:id="@+id/widget_div_3" android:layout_width="match_parent"
+        android:layout_height="0.5dp" android:background="#22FFFFFF"
+        android:layout_marginVertical="2dp" android:visibility="gone" />
 
-    <!-- Row 4 -->
     <LinearLayout
         android:id="@+id/widget_row_4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingVertical="5dp"
+        android:paddingVertical="4dp"
         android:visibility="gone">
         <TextView android:id="@+id/widget_title_4"
             android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -121,14 +140,16 @@
             android:layout_width="match_parent" android:layout_height="wrap_content"
             android:textSize="10sp" android:textColor="#AAFFFFFF" />
     </LinearLayout>
+    <View android:id="@+id/widget_div_4" android:layout_width="match_parent"
+        android:layout_height="0.5dp" android:background="#22FFFFFF"
+        android:layout_marginVertical="2dp" android:visibility="gone" />
 
-    <!-- Row 5 -->
     <LinearLayout
         android:id="@+id/widget_row_5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingVertical="5dp"
+        android:paddingVertical="4dp"
         android:visibility="gone">
         <TextView android:id="@+id/widget_title_5"
             android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -138,5 +159,10 @@
             android:layout_width="match_parent" android:layout_height="wrap_content"
             android:textSize="10sp" android:textColor="#AAFFFFFF" />
     </LinearLayout>
+
+
+    <View android:id="@+id/widget_div_5" android:layout_width="match_parent"
+        android:layout_height="0.5dp" android:background="#22FFFFFF"
+        android:layout_marginVertical="2dp" android:visibility="gone" />
 
 </LinearLayout>
